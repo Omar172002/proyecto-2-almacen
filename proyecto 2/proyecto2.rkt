@@ -204,21 +204,25 @@
 
 ;FUNCION PARA SABER EL CAMINO MAS CORTO ENTRE SUBIR Y BAJAR 
 (define (camino-corto matriz nuevoElemento archivo)
+  (define num-bajar (buscar-con-bajar matriz nuevoElemento))
+  (define num-subir (buscar-con-subir matriz nuevoElemento))
   (cond
     ((null? matriz) 0)
-    ((< (buscar-con-bajar matriz nuevoElemento) (buscar-con-subir matriz nuevoElemento))
-     (bajar-y-guardar-n-veces (buscar-con-bajar matriz nuevoElemento) matriz archivo))
+    ((< num-bajar  num-subir )
+     (bajar-y-guardar-n-veces num-bajar matriz archivo))
     (else
-     (subir-y-guardar-n-veces (buscar-con-subir matriz nuevoElemento) matriz archivo))))
+     (subir-y-guardar-n-veces num-subir  matriz archivo))))
 
 ;FUNCION PARA SABER LOS MOVIMIENTOS NECESARIOS EN X "DERECHA" O "IZQUIERDA"
 (define (posicion-x producto)
+  (define posicion-producto (car (cdr (posicion (Almacen) producto))))
+  (define posicion-ventanilla (car (cdr (Ventanilla))))
   (cond
-    ((< (car (cdr (posicion (Almacen) producto))) (car (cdr (Ventanilla)))) (imprime-izquierda (car (cdr (Ventanilla)))))
+    ((< posicion-producto posicion-ventanilla) (imprime-izquierda (- posicion-ventanilla posicion-producto)))
   
-    ((> (car (cdr (posicion (Almacen) producto))) (car (cdr (Ventanilla)))) (imprime-derecha (car (cdr (posicion (Almacen) producto)))))
+    ((> posicion-producto posicion-ventanilla) (imprime-derecha (- posicion-producto posicion-ventanilla)))
        
-    ((= (car (cdr (posicion (Almacen) producto))) (car (cdr (Ventanilla))))(display ""))))
+    ((= posicion-producto posicion-ventanilla) (display ""))))
 
 
 (define (imprime-izquierda n) ;imprime la palabra izquierda N veces

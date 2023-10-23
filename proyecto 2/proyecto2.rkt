@@ -1,4 +1,6 @@
 #lang racket
+; con la funcion (funciones) puedes ejecutar el archivo funciones.txt
+
 
 ;funcion para leer un archivo
 (define (leer-archivo nombre)
@@ -7,8 +9,8 @@
   (close-input-port act)x)
 
 
-;cambia el nombre de archivoProductos por "productos2.txt" para probar un almacen de 10 x 4
-(define archivoProductos "productos2.txt")
+;En archivoProductos cambia "productos.txt" por "productos2.txt" para probar un almacen de 10 x 4
+(define archivoProductos "productos.txt")
 
 ; funcion para leer el valor de mi archivo ventanilla
 (define (Ventanilla)
